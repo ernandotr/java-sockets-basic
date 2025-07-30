@@ -2,8 +2,10 @@ package br.com.ernando.sockets.chat;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.logging.Logger;
 
 public class ThreadListener extends Thread {
+    Logger logger = Logger.getLogger(ThreadListener.class.getName());
     private final BufferedReader in;
 
     public ThreadListener(BufferedReader in){
@@ -15,10 +17,10 @@ public class ThreadListener extends Thread {
         String input;
         try {
           while ((input = in.readLine()) != null) {
-              System.out.println("Recebi:"+ input);
+              logger.info("Recebi: {}", input);
           }
         } catch (IOException e) {
-            System.err.println("Erro ao ler os dados recebidos.");
+            logger.info("Erro ao ler os dados recebidos.");
         }
     }
 }
