@@ -6,10 +6,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.logging.Logger;
 
 public class Client {
     public static void main(String[] args) throws IOException {
-        System.out.println("Starting client...");
+        Logger logger = Logger.getLogger(Client.class.getName());
+        logger.info("Starting client...");
         Socket socket = new Socket("localhost", 5001);
         PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
         BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -19,7 +21,7 @@ public class Client {
         while (true) {
             input = JOptionPane.showInputDialog(null, "Message to server", "Client", JOptionPane.INFORMATION_MESSAGE);
             out.println(input);
-            System.out.println("Client: " + input);
+            logger.info("Client: {}", input);
         }
     }
 }
